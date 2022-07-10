@@ -28,7 +28,6 @@ const ToDoItem = ({ item, handleToggle, handleRemove }: { item: TodoItemType, ha
     const { id, task, complete } = item;
 
     const handleClick = (e: any) => {
-        console.log('handleClick', e.currentTarget);
         e.preventDefault();
         handleToggle(e.currentTarget.getAttribute("item-id"));
     }

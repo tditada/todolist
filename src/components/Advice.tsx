@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-// This could go to a constants.ts if there's to many or shared
 const API_URL = "https://api.adviceslip.com/advice";
-
-//TODO: Test hook and component
-//TODO: Typescript strict
-//TODO: Redux/Pass state to children
 
 function Advice() {
     const [advice, setAdvice] = useState<string>("");
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(API_URL);
+            setAdvice(response.data.slip.advice);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
     useEffect(() => {
-        const url: string = API_URL;
-
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url);
-                const json = await response.json();
-                setAdvice(json.slip.advice)
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
-
         fetchData();
     }, []);
 
-
     return (
         <div>
-            <p> {advice}</p>
+            <p data-testid="advice"> {advice} </p>
         </div>
     );
 }

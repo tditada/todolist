@@ -2,31 +2,31 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import AddItem from './AddItemForm';
 import ToDoItem from './ToDoItem';
-import { AddTaskType, HandleToggleType, HandleRemoveType, TodoItemType, ToDoListType } from './types';
+import { AddTaskType, HandleToggleType, HandleRemoveType, TodoItemType, ToDoListType, GetDataType } from './types';
 
 const TODO_API = 'https://62c9e916d9ead251e8c237f0.mockapi.io/ToDoItem';
 
 const ToDoList = () => {
     const [toDoList, setToDoList] = useState<ToDoListType>([]);
-    const [loading, setLoading] = useState<Boolean>(true);
-    const [error, setError] = useState<String | null>(null);
+    // const [loading, setLoading] = useState<Boolean>(true);
+    // const [error, setError] = useState<String | null>(null);
   
-    const getData = async () => {
+    const getData: GetDataType = async () => {
       try {
         const response = await axios.get(TODO_API);
         setToDoList(response.data);
-        setError(null);
+        // setError(null);
       } catch (err: any) {
-        setError(err.message);
+        // setError(err.message);
         setToDoList([]);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
   
     const handleToggle: HandleToggleType = (id: string) => {
       let mapped = toDoList.map(task => {
-        return task.id == id ? { ...task, complete: !task.complete } : { ...task };
+        return task.id === id ? { ...task, complete: !task.complete } : { ...task };
       });
       setToDoList(mapped);
     }
