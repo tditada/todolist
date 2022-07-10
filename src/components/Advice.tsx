@@ -8,10 +8,10 @@ const API_URL = "https://api.adviceslip.com/advice";
 //TODO: Redux/Pass state to children
 
 function Advice() {
-    const [advice, setAdvice] = useState("");
+    const [advice, setAdvice] = useState<string>("");
 
     useEffect(() => {
-        const url = API_URL;
+        const url: string = API_URL;
 
         const fetchData = async () => {
             try {
